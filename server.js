@@ -1,26 +1,12 @@
 // Dependencies
 var express = require("express");
-var mongojs = require("mongojs");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
-// Require request and cheerio. This makes the scraping possible
-var request = require("request");
-var cheerio = require("cheerio");
-
 
 // Initialize Express
 var app = express();
-// Database configuration
-var databaseUrl = "scraper";
-var collections = ["scrapedData"];
-// Hook mongojs configuration to the db variable
-var db = mongojs(databaseUrl, collections);
-
-
-// Require all models
-var db = require("./models");
 
 var port = process.env.PORT || 3000;
 
@@ -39,7 +25,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
+  // useMongoClient: true
 });
 
 
@@ -48,9 +34,7 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-require('./controllers/fetch.js')
-require('./controllers/headline.js')
-require('./controllers/note.js')
+require('./routes')(app);
 
 app.use(function (err, req, res, next) {
   console.log('We had an error.', err)
@@ -59,10 +43,6 @@ app.use(function (err, req, res, next) {
   })
 })
 
-
-db.on("error", function(error) {
-  console.log("Database Error:", error);
-});
 
 // Listen on port 3000
 app.listen(3000, function() {

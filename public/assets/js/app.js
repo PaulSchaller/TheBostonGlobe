@@ -6,6 +6,13 @@ $.getJSON("/headlines", function(data) {
     $("#headlines").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
   }
 });
+
+$(document).on('click', '#scrape', function() {
+  $.getJSON('/fetch', function(data) {
+    alert("There are " + data.headlines + ' new headlines.');
+    // TODO: once they click OK, redirect to /
+  })
+});
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
   // Empty the notes from the note section
