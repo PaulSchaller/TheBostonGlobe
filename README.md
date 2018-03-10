@@ -11,11 +11,11 @@ If the user scrapes the current articles from the website, a listing of the arti
 With the listing of the saved articless, the user has an option to write a note on an article and save it.  The user can also see the previous notes written for an article and delete the notes.  
 
 The program used the following npm installs:
-express
-express-handlebars
-mongoose
-body-parser
-cheerio
-request
+1. express
+2. express-handlebars
+3. mongoose
+4. body-parser
+5. cheerio
+6. request
 
 The program is deployed at https://pacific-castle-40779.herokuapp.com/
