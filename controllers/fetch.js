@@ -27,7 +27,7 @@ module.exports = {
             }
           }
 
-       req.json({headlines: 5});
+       res.json({headlines: newArticles});
    
     });
   }
