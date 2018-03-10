@@ -12,7 +12,7 @@ var scrape = require("../scripts/scrape.js");
 module.exports = {
   fetch: function(req, res) {
     scrape(function(articles) {
-        console.log("Hi Paul");
+        
         var newArticles = 0;
         for(var i=0; i<articles.length; i++){
           if (!db.Headline.includes(articles[i])) {
@@ -27,7 +27,7 @@ module.exports = {
             }
           }
 
-       res.json(newArticles);
+       req.json({headlines: 5});
    
     });
   }
